@@ -19,7 +19,7 @@ namespace WarehouseSimulation
 		{
 		}
 
-		void Run()
+		public void Run()
 		{
 
 		}
