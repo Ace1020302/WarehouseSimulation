@@ -27,6 +27,18 @@ namespace WarehouseSimulation
             this.deliveryCompany = deliveryCompany;
             this.Trailer = trailer;
         }
+
+        public void Load(Crate crate)
+        {
+            Trailer.Push(crate);
+        }
+
+        public Crate Unload()
+        {
+            return Trailer.Pop();
+        }
+
+        public int GetNumberOfCrates() => Trailer.Count();
     }
 }
 

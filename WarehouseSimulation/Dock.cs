@@ -9,11 +9,7 @@ namespace WarehouseSimulation
 			set;
 		}
 
-		Queue<Truck> Line
-		{
-			get;
-			set;
-		}
+		Queue<Truck> Line = new Queue<Truck>();
 
 		double TotalSales
 		{
@@ -21,16 +17,20 @@ namespace WarehouseSimulation
 			set;
 		}
 
-		int TotalCrates
+		public int TotalCrates
 		{
-			get;
-			set;
-		}
+			get
+			{
+                int x = 0;
+                for (int i = 0; i < Line.Count(); i++)
+                    x += Line.ElementAt(i).GetNumberOfCrates();
+				return x;
+            }
+        }
 
-		int TotalTrucks
+		public int TotalTrucks
 		{
-			get;
-			set;
+			get => Line.Count();
 		}
 
 		int TimeInUse
@@ -47,11 +47,14 @@ namespace WarehouseSimulation
 
 		public Dock()
 		{
+
 		}
 
-		void JoinLine(Truck truck)
+		public void JoinLine(Truck truck)
 		{
-
+			//Truck newTruck = ;
+			//Line.Enqueue(new Truck("joe", "truckTruckz", new Stack<Crate>()));
+			Line.Enqueue(truck);
 		}
 
 		Truck sendOff()

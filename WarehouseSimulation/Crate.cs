@@ -15,10 +15,10 @@ namespace WarehouseSimulation
 			set;
 		}
 
-		public Crate(string id, double price)
+		public Crate(string id)
 		{
 			this.Id = id;
-			this.Price = price;
+			this.Price = (new Random()).NextDouble() * 500;
 		}
 	}
 }
