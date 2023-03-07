@@ -45,11 +45,18 @@ namespace WarehouseSimulation
 			set;
 		}
 
-		public Dock(string driver, string deliveryCompany, Stack<Crate> trailer)
+		public Dock()
 		{
-			this.driver = driver;
-			this.deliveryCompany = deliveryCompany;
-			this.Trailer = trailer;
+		}
+
+		void JoinLine(Truck truck)
+		{
+
+		}
+
+		Truck sendOff()
+		{
+			return Line.Dequeue();
 		}
 	}
 }
