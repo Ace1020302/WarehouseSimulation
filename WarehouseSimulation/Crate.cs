@@ -3,8 +3,22 @@ namespace WarehouseSimulation
 {
 	public class Crate
 	{
-		public Crate()
+		string Id
 		{
+			get;
+			set;
+		}
+
+		double Price
+		{
+			get;
+			set;
+		}
+
+		public Crate(string id, double price)
+		{
+			this.Id = id;
+			this.Price = price;
 		}
 	}
 }
