@@ -3,23 +3,33 @@ namespace WarehouseSimulation
 {
 	public class Crate
 	{
-		string Id;
+		static int IdNum = 0;
 
-		double Price
+		string id;
+
+		private double price;
+		public double Price
 		{
-			get => this.Price;
-			set => Math.Min(50, value);
+			get => price;
+			set => price = Math.Max(50, value);
 		}
 
-		public Crate(string id)
+		public Crate()
 		{
-			this.Id = id;
-			this.Price = (new Random()).NextDouble() * 500;
+			IdNum++;
+			id = idToString();
+			Price = (new Random()).NextDouble() * 500;
 		}
 
+		private string idToString()
+		{
+			string idString = $"{IdNum}".PadLeft(3, '0');
+			return $"U{idString}";
+		}
         public override string ToString()
         {
-            return $"Crate {Id}: ${Price}";
+            double priceRounded = Math.Round(Price, 2);
+            return $"Crate {id}: ${priceRounded}";
         }
     }
 }

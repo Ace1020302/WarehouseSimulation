@@ -27,9 +27,9 @@ namespace WarehouseSimulation
 		{
 			Dock dock = new Dock();
 			
-			Crate crateOne = new Crate("U001");
-            Crate crateTwo = new Crate("U002");
-            Crate crateThree = new Crate("U003");
+			Crate crateOne = new Crate();
+            Crate crateTwo = new Crate();
+            Crate crateThree = new Crate();
 			Stack<Crate> crates = new Stack<Crate>();
 			crates.Push(crateOne);
             crates.Push(crateTwo);
