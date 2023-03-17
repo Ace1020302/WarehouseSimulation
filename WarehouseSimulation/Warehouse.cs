@@ -26,7 +26,7 @@ namespace WarehouseSimulation
 		private void SetupSimulation()
 		{
 			Dock dock = new Dock();
-
+			
 			Crate crateOne = new Crate("U001");
             Crate crateTwo = new Crate("U002");
             Crate crateThree = new Crate("U003");
@@ -34,6 +34,9 @@ namespace WarehouseSimulation
 			crates.Push(crateOne);
             crates.Push(crateTwo);
             crates.Push(crateThree);
+
+			foreach(Crate cr in crates)
+				Console.WriteLine(cr);
 
 			Truck truckToAdd = new Truck("Joe", "TruckTruckz", crates);
 
