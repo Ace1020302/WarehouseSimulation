@@ -3,17 +3,9 @@ namespace WarehouseSimulation
 {
 	public class Crate
 	{
-		string Id
-		{
-			get;
-			set;
-		}
+		string Id;
 
-		double Price
-		{
-			get;
-			set;
-		}
+		double Price;
 
 		public Crate(string id)
 		{

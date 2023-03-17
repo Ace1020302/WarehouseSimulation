@@ -3,23 +3,11 @@ namespace WarehouseSimulation
 {
 	public class Truck
 	{
-        string driver
-        {
-            get;
-            set;
-        }
+        string driver;
 
-        string deliveryCompany
-        {
-            get;
-            set;
-        }
+        string deliveryCompany;
 
-        Stack<Crate> Trailer
-        {
-            get;
-            set;
-        }
+        Stack<Crate> Trailer;
 
         public Truck(string driver, string deliveryCompany, Stack<Crate> trailer)
         {

@@ -3,47 +3,27 @@ namespace WarehouseSimulation
 {
 	public class Dock
 	{
-		string Id
-		{
-			get;
-			set;
-		}
+		string Id;
 
 		Queue<Truck> Line = new Queue<Truck>();
 
-		double TotalSales
-		{
-			get;
-			set;
-		}
+		double TotalSales;
 
 		public int TotalCrates
 		{
 			get
 			{
                 int x = 0;
-                for (int i = 0; i < Line.Count(); i++)
-                    x += Line.ElementAt(i).GetNumberOfCrates();
+				for (int i = 0; i < Line.Count(); i++)
+					x += Line.ElementAt(i).GetNumberOfCrates();
 				return x;
-            }
+			}
         }
 
-		public int TotalTrucks
-		{
-			get => Line.Count();
-		}
+		public int TotalTrucks => Line.Count();
 
-		int TimeInUse
-		{
-			get;
-			set;
-		}
-
-		int TimeNotInUse
-		{
-			get;
-			set;
-		}
+		int TimeInUse;
+		int TimeNotInUse;
 
 		public Dock()
 		{
