@@ -11,15 +11,19 @@ namespace WarehouseSimulation
 
 		double TotalSales;
 
-		public int TotalCrates = 0;
+		public int TotalCrates
+		{
+			get { return Crates.Count(); }
+		}
 
+		private Stack<Crate> Crates = new Stack<Crate>();
 		
 		public int TotalTrucks => Line.Count();
 
 		int TimeInUse = 0;
 		int timeNotInUse = 0;
 
-		int TimeNotInUse
+		public int TimeNotInUse
 		{
 			get => timeNotInUse;
 			// Total time (48 increments) - the time that it was being used.
@@ -54,7 +58,7 @@ namespace WarehouseSimulation
 
 			Truck currentTruck = Line.Peek();
 			if (currentTruck.GetNumberOfCrates > 0)
-				currentTruck.Unload();
+				Crates.Push(currentTruck.Unload);
 			else
 				sendOff();
 

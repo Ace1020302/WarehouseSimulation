@@ -62,9 +62,16 @@ namespace WarehouseSimulation
 
                 timeWindows--;
             }
-            
-			// Each dock costs 100 for every time increment
 
+			// Each dock costs 100 for every time increment
+			int totalCost = 0;
+			foreach(Dock dock in Docks)
+			{
+                Console.WriteLine(dock);
+                totalCost += 48 - dock.TimeNotInUse;
+            }
+			totalCost *= 100;
+            Console.WriteLine(totalCost);
         }
 
         private void SetupSimulation(int amtOfDocks=15, int amtOfTrucks=100)
