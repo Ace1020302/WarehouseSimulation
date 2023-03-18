@@ -5,6 +5,8 @@ class Program
     {
         Warehouse warehouseSim = new Warehouse();
         warehouseSim.Run();
+
+        Console.ReadLine();
     }
 }
 
