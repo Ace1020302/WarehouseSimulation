@@ -3,9 +3,11 @@ namespace WarehouseSimulation
 {
 	public class Dock
 	{
-		string Id;
+        static int IdNum = 0;
 
-		Queue<Truck> Line = new Queue<Truck>();
+        string id;
+
+        Queue<Truck> Line = new Queue<Truck>();
 
 		double TotalSales;
 
@@ -27,10 +29,18 @@ namespace WarehouseSimulation
 
 		public Dock()
 		{
+            IdNum++;
+            id = idToString();
+        }
 
-		}
+        private string idToString()
+        {
+			//string idString = $"{IdNum}".PadLeft(2, '0');
+			//return $"{idString}";
+			return $"{IdNum}";
+        }
 
-		public void JoinLine(Truck truck)
+        public void JoinLine(Truck truck)
 		{
 			//Truck newTruck = ;
 			//Line.Enqueue(new Truck("joe", "truckTruckz", new Stack<Crate>()));
@@ -41,6 +51,11 @@ namespace WarehouseSimulation
 		{
 			return Line.Dequeue();
 		}
-	}
+
+        public override string ToString()
+        {
+            return $"Dock {id}: {TotalTrucks} Trucks, {TotalCrates} Crates";
+        }
+    }
 }
 

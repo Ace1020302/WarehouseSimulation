@@ -24,7 +24,7 @@ namespace WarehouseSimulation
 		private string idToString()
 		{
 			string idString = $"{IdNum}".PadLeft(3, '0');
-			return $"U{idString}";
+			return $"C{idString}";
 		}
         public override string ToString()
         {

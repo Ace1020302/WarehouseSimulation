@@ -5,11 +5,7 @@ namespace WarehouseSimulation
 	{
 		List<Dock> Docks = new List<Dock>();
 
-		Queue<Truck> Entrance
-		{
-			get;
-			set;
-		}
+		Queue<Truck> Entrance = new Queue<Truck>();
 
 		public Warehouse()
 		{
@@ -19,30 +15,29 @@ namespace WarehouseSimulation
 		{
 			SetupSimulation();
 
-			int i = 0;
-			Console.WriteLine($"Dock {i}: {Docks[i].TotalTrucks} Trucks, {Docks[i].TotalCrates} Crates");
+			Random rand = new Random();
+			int timeWindows = 48;
+			Dock tempDock;
+
+			while (timeWindows >= 0)
+			{
+				tempDock = Docks[rand.Next(Docks.Count() - 1)];
+				for (int i = 0; i < rand.Next(Entrance.Count()); i++)
+					tempDock.JoinLine(Entrance.Dequeue());
+
+				Console.WriteLine(tempDock);
+				timeWindows--;
+            }
+			
 		}
 
-		private void SetupSimulation()
+		private void SetupSimulation(int amtOfDocks=15, int amtOfTrucks=100)
 		{
-			Dock dock = new Dock();
-			
-			Crate crateOne = new Crate();
-            Crate crateTwo = new Crate();
-            Crate crateThree = new Crate();
-			Stack<Crate> crates = new Stack<Crate>();
-			crates.Push(crateOne);
-            crates.Push(crateTwo);
-            crates.Push(crateThree);
+			for (int i = 0; i < amtOfDocks; i++)
+				Docks.Add(new Dock());
 
-			foreach(Crate cr in crates)
-				Console.WriteLine(cr);
-
-			Truck truckToAdd = new Truck("Joe", "TruckTruckz", crates);
-
-            dock.JoinLine(truckToAdd);
-
-			Docks.Add(dock);
+			for (int i = 0; i < amtOfTrucks; i++)
+				Entrance.Enqueue(TruckFactory.GetRandomTruck());
 		}
 	}
 }
