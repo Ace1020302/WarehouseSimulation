@@ -21,6 +21,14 @@ namespace WarehouseSimulation
 
 			while (timeWindows >= 0)
 			{
+				// for each time increment, or loop in this while, a truck can enter a dock.
+				// For each truck, a single crate can be unloaded each time increment.
+				// For each dock.
+
+				// Trucks immediately swap out if there is another at the dock. No time increment decrease.
+				// Each dock costs 100 for every time increment
+				// Trucks arrive at random to the entrance over the course of the simulation.
+
 				tempDock = Docks[rand.Next(Docks.Count())];
 				for (int i = 0; i < rand.Next(Entrance.Count()); i++)
 					tempDock.JoinLine(Entrance.Dequeue());
