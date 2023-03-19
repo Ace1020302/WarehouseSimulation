@@ -9,7 +9,15 @@ namespace WarehouseSimulation
 
         Queue<Truck> Line = new Queue<Truck>();
 
-		double TotalSales;
+		public double TotalSales
+		{
+			get 
+			{ 
+				double sum = 0; 
+				foreach (Crate crate in Crates) 
+					sum += crate.Price; return sum; 
+			}
+		}
 
 		public int TotalCrates
 		{
@@ -20,14 +28,11 @@ namespace WarehouseSimulation
 		
 		public int TotalTrucks => Line.Count();
 
-		int TimeInUse = 0;
-		int timeNotInUse = 0;
+		public int TimeInUse = 0;
 
 		public int TimeNotInUse
 		{
-			get => timeNotInUse;
-			// Total time (48 increments) - the time that it was being used.
-			set => timeNotInUse = 48 - TimeInUse;
+			get => 48 - TimeInUse;
 		}
 
 		public Dock()
@@ -52,17 +57,18 @@ namespace WarehouseSimulation
 
 		public void DoCurrentTruckAction()
 		{
-			// stops it from doing anything if nothing needs to happen.
+            // stops it from doing anything if nothing needs to happen.
 			if (TotalTrucks == 0)
 				return;
 
-			Truck currentTruck = Line.Peek();
-			if (currentTruck.GetNumberOfCrates > 0)
-				Crates.Push(currentTruck.Unload);
+            Truck currentTruck = Line.Peek();
+			if (currentTruck.GetNumberOfCrates() > 0)
+				Crates.Push(currentTruck.Unload());
 			else
 				sendOff();
 
-			incrementTimeInUse;
+            Console.WriteLine($"Incremented time for Dock {id} | Total: {TimeInUse} hours");
+            TimeInUse++;
 		}
 
 		private Truck sendOff()
@@ -70,10 +76,8 @@ namespace WarehouseSimulation
 			return Line.Dequeue();
 		}
 
-		public void incrementTimeInUse() => TimeInUse++;
-
 		// Testing method -- remove
-		private void TotalCratesIncludingTrucks()
+		private int TotalCratesIncludingTrucks()
 		{
             int x = 0;
             for (int i = 0; i < Line.Count(); i++)
