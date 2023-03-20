@@ -7,10 +7,6 @@ namespace WarehouseSimulation
 
 		Queue<Truck> Entrance = new Queue<Truck>();
 
-		public Warehouse()
-		{
-		}
-
 		public void Run()
 		{
 			SetupSimulation(1, 0);
@@ -27,7 +23,6 @@ namespace WarehouseSimulation
                 if (rand.Next(2) == 0)
 				{
 					int trucksToAdd = rand.Next(3) + 1;
-					trucksToAdd = trucksToAdd;
                     // 1 - 4 trucks will be added at random.
                     AddTrucks(trucksToAdd);
 					totalAdds++;
@@ -65,7 +60,8 @@ namespace WarehouseSimulation
                     currentDock.DoCurrentTruckAction();
                 }
 
-                
+
+                //Thread.Sleep(500);
 
                 timeWindows--;
             }

@@ -7,6 +7,11 @@ namespace WarehouseSimulation
 		readonly static string[] companies = { "Truck Trackz", "X-its", "Truck and Trailer Inc.", "Christof's Trucks", "Transport Co.", "Z-Speed Transportation", "Speed Depot" };
 		static Random randomizer = new Random(10005);
 
+
+		/// <summary>
+		/// Returns a truck with a randomized properties and 1-5 crates.
+		/// </summary>
+		/// <returns></returns>
         public static Truck GetRandomTruck()
 		{
 			string driver = names[randomizer.Next(names.Length - 1)];

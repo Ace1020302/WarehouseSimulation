@@ -5,7 +5,7 @@ namespace WarehouseSimulation
 	{
 		static int IdNum = 0;
 
-		string id;
+		string Id;
 
 		private double price;
 		public double Price
@@ -17,19 +17,24 @@ namespace WarehouseSimulation
 		public Crate()
 		{
 			IdNum++;
-			id = idToString();
+			Id = idToString();
 			Price = (new Random()).NextDouble() * 500;
 		}
 
+		/// <summary>
+		/// Converts the id number to a padded string lead with a capital C.
+		/// </summary>
+		/// <returns> Returns a string </returns>
 		private string idToString()
 		{
 			string idString = $"{IdNum}".PadLeft(3, '0');
 			return $"C{idString}";
 		}
+
         public override string ToString()
         {
             double priceRounded = Math.Round(Price, 2);
-            return $"Crate {id}: ${priceRounded}";
+            return $"Crate {Id}: ${priceRounded}";
         }
     }
 }

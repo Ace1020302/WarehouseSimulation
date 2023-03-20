@@ -3,44 +3,56 @@ namespace WarehouseSimulation
 {
 	public class Dock
 	{
+		// increments for each new dock
         static int IdNum = 0;
 
-        string id;
+        string Id;
 
         Queue<Truck> Line = new Queue<Truck>();
 
+		// Gets total amount of money from all the crates at the dock
 		public double TotalSales
 		{
 			get 
-			{ 
+			{
+				//TODO: reduce to one-line?
 				double sum = 0; 
 				foreach (Crate crate in Crates) 
 					sum += crate.Price; return sum; 
 			}
 		}
 
+		// The crates in the dock (not the trucks)
 		public int TotalCrates
 		{
-			get { return Crates.Count(); }
+			get => Crates.Count();
 		}
 
 		private Stack<Crate> Crates = new Stack<Crate>();
-		
+
+		// Number of Trucks at the Dock
 		public int TotalTrucks => Line.Count();
 
+		// The amount of time the Dock has been used
 		public int TimeInUse = 0;
 
-		public int TimeNotInUse
+        // The amount of time the Dock has not been used
+        public int TimeNotInUse
 		{
+			// total time - time in use
 			get => 48 - TimeInUse;
 		}
 
 		public Dock()
 		{
             IdNum++;
-            id = idToString();
+            Id = idToString();
         }
 
+        /// <summary>
+        /// Converts the id number to a string
+        /// </summary>
+        /// <returns> Returns id as string </returns>
         private string idToString()
         {
 			//string idString = $"{IdNum}".PadLeft(2, '0');
@@ -48,13 +60,19 @@ namespace WarehouseSimulation
 			return $"{IdNum}";
         }
 
-		
+		/// <summary>
+		/// Adds a truck to the Dock's line.
+		/// </summary>
+		/// <param name="truck"> Truck being added to the line </param>
         public void JoinLine(Truck truck)
 		{
 			Line.Enqueue(truck);
 		}
 
 
+		/// <summary>
+		/// Causes the current truck to either unload, or move on.
+		/// </summary>
 		public void DoCurrentTruckAction()
 		{
             // stops it from doing anything if nothing needs to happen.
@@ -67,14 +85,15 @@ namespace WarehouseSimulation
 			else
 				sendOff();
 
-            Console.WriteLine($"Incremented time for Dock {id} | Total: {TimeInUse} hours");
+            Console.WriteLine($"Incremented time for Dock {Id} | Total: {TimeInUse} hours");
             TimeInUse++;
 		}
 
-		private Truck sendOff()
-		{
-			return Line.Dequeue();
-		}
+		/// <summary>
+		/// Takes a truck out of the Dock line.
+		/// </summary>
+		/// <returns> Returns Truck that is leaving the queue </returns>
+		private Truck sendOff() => Line.Dequeue();
 
 		// Testing method -- remove
 		private int TotalCratesIncludingTrucks()
@@ -85,9 +104,10 @@ namespace WarehouseSimulation
             return x;
         }
 
+
         public override string ToString()
         {
-            return $"Dock {id}: {TotalTrucks} Trucks, {TotalCrates} Crates";
+            return $"Dock {Id}: {TotalTrucks} Trucks, {TotalCrates} Crates";
         }
     }
 }
