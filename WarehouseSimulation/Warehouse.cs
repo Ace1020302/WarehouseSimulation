@@ -3,6 +3,7 @@ namespace WarehouseSimulation
 {
 	public class Warehouse
 	{
+        // max of 15
 		List<Dock> Docks = new List<Dock>();
 
 		Queue<Truck> Entrance = new Queue<Truck>();
@@ -40,11 +41,11 @@ namespace WarehouseSimulation
                             OptimalDock = Docks[i];
                     }
 
-                    if (OptimalDock.TotalTrucks > 0)
-                    {
-                        OptimalDock = new Dock();
-                        Docks.Add(OptimalDock);
-                        Console.WriteLine("A new Dock Opened");
+                    if (OptimalDock.TotalTrucks > 0 && Docks.Count() < 15)
+                    {     
+                            OptimalDock = new Dock();
+                            Docks.Add(OptimalDock);
+                            Console.WriteLine("A new Dock Opened");
                     }
 
                     OptimalDock.JoinLine(Entrance.Dequeue());
