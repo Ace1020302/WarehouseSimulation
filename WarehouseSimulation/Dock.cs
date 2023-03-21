@@ -40,7 +40,7 @@ namespace WarehouseSimulation
         public int TimeNotInUse
 		{
 			// total time - time in use
-			get => 48 - TimeInUse;
+			get => (int) GlobalEnum.TIME_INCREMENTS - TimeInUse;
 		}
 
 		public Dock()
@@ -53,7 +53,7 @@ namespace WarehouseSimulation
 		/// Converts the id to a string
 		/// </summary>
 		/// <param name="idNumToConvert"> Id of dock to convert</param>
-		/// <returns> String </returns>
+		/// <returns> String g</returns>
         private string idToString(int idNumToConvert)
         {
 			//string idString = $"{IdNum}".PadLeft(2, '0');
