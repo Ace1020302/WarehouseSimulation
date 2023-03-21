@@ -74,18 +74,45 @@ namespace WarehouseSimulation
 		/// <summary>
 		/// Causes the current truck to either unload, or move on.
 		/// </summary>
-		public void DoCurrentTruckAction()
+		public void DoCurrentTruckAction(int timeIncrement)
 		{
-            // stops it from doing anything if nothing needs to happen.
+			// stops it from doing anything if nothing needs to happen.
 			if (TotalTrucks == 0)
 				return;
 
-            Truck currentTruck = Line.Peek();
-			if (currentTruck.GetNumberOfCrates() > 0)
-				Crates.Push(currentTruck.Unload());
-			else
-				sendOff();
+            string infoToOutput = $"Time: {timeIncrement},";
 
+            Truck currentTruck = Line.Peek();
+
+			if (!currentTruck.IsTrailerEmpty())
+			{
+				Crate poppedCrate = currentTruck.Unload();
+
+				infoToOutput += currentTruck.ToString() + ',';
+				infoToOutput += poppedCrate.ToString() + ',';
+
+				// check if it was the last crate. If it is, execute.
+                if (currentTruck.IsTrailerEmpty())
+                {
+                    infoToOutput += "Crate was unloaded but the truck has no more crates to unload";
+					// If the truck is empty, send it off. Say whether or not the dock is now empty
+					sendOff();
+					if(Line.Count() != 0)
+						infoToOutput += "and another truck is already in the Dock";
+					else
+						infoToOutput += "and another truck is not in the Dock";
+                    
+                }
+                else
+                    infoToOutput += "Crate was unloaded but the truck still has more crates to unload";
+
+				infoToOutput += ",\n";
+
+				Console.WriteLine(infoToOutput);
+
+				Crates.Push(poppedCrate);
+			}
+			
             Console.WriteLine($"Incremented time for Dock {Id} | Total: {TimeInUse} hours");
             TimeInUse++;
 		}

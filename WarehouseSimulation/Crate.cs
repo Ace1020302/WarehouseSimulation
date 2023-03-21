@@ -5,7 +5,7 @@ namespace WarehouseSimulation
 	{
 		static int IdNum = 0;
 
-		string Id;
+		public string Id { get; private set; }
 
 		private double price;
 		public double Price
@@ -34,7 +34,10 @@ namespace WarehouseSimulation
         public override string ToString()
         {
             double priceRounded = Math.Round(Price, 2);
-            return $"Crate {Id}: ${priceRounded}";
+			string infoToOutput = string.Empty;
+            infoToOutput += $"Crate ID: {Id},";
+            infoToOutput += $"Crate Value: ${priceRounded}";
+            return infoToOutput;
         }
     }
 }

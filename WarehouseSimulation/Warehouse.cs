@@ -8,9 +8,14 @@ namespace WarehouseSimulation
 
 		Queue<Truck> Entrance = new Queue<Truck>();
 
+
+        public Warehouse(int amtOfDocks=0)
+        {
+            SetupSimulation(amtOfDocks, 0);
+        }
+
 		public void Run()
 		{
-			SetupSimulation(1, 0);
 
             Random rand = new Random((int) GlobalEnum.SEED_FOR_RANDOM);
             int timeWindows = (int) GlobalEnum.TIME_INCREMENTS;
@@ -21,8 +26,9 @@ namespace WarehouseSimulation
                 // Trucks arrive at random to the entrance over the course of the simulation.
 
                 // Everytime increment, trucks might show up. 50/50 chance each increment
-                if (rand.Next(2) == 0)
-				{
+                //if (rand.Next(2) == 0)
+                if(true)
+                {
 					int trucksToAdd = rand.Next(3) + 1;
                     // 1 - 4 trucks will be added at random.
                     AddTrucks(trucksToAdd);
@@ -37,16 +43,16 @@ namespace WarehouseSimulation
                     Dock OptimalDock = Docks[0];
                     for (int i = 1; i < Docks.Count(); i++)
                     {
-                        if (Docks[i].TotalTrucks <= OptimalDock.TotalTrucks)
+                        if (Docks[i].TotalTrucks < OptimalDock.TotalTrucks)
                             OptimalDock = Docks[i];
                     }
 
-                    if (OptimalDock.TotalTrucks > 0 && Docks.Count() < 15)
-                    {     
-                            OptimalDock = new Dock();
-                            Docks.Add(OptimalDock);
-                            Console.WriteLine("A new Dock Opened");
-                    }
+                    //if (OptimalDock.TotalTrucks > 0 && Docks.Count() < 15)
+                    //{     
+                    //        OptimalDock = new Dock();
+                    //        Docks.Add(OptimalDock);
+                    //        Console.WriteLine("A new Dock Opened");
+                    //}
 
                     OptimalDock.JoinLine(Entrance.Dequeue());
                 }
@@ -58,7 +64,7 @@ namespace WarehouseSimulation
 				{
 					Dock currentDock = Docks[i];
                     // Trucks immediately swap out if there is another at the dock. No time increment decrease.
-                    currentDock.DoCurrentTruckAction();
+                    currentDock.DoCurrentTruckAction((int) GlobalEnum.TIME_INCREMENTS - timeWindows);
                 }
 
 

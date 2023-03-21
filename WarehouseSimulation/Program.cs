@@ -3,7 +3,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        (new Warehouse()).Run();
+        (new Warehouse(15)).Run();
 
         Console.ReadLine();
     }
