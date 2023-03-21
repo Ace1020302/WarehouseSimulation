@@ -12,12 +12,12 @@ namespace WarehouseSimulation
 		{
 			SetupSimulation(1, 0);
 
-            Random rand = new Random(10005);
-            int timeWindows = 48;
+            Random rand = new Random((int) GlobalEnum.SEED_FOR_RANDOM);
+            int timeWindows = (int) GlobalEnum.TIME_INCREMENTS;
 			int totalAdds = 0;
 			while (timeWindows > 0)
 			{
-				Console.WriteLine("\n--------------- Time Increment: " + (48-timeWindows) + "-------------------\n");
+				Console.WriteLine("\n--------------- Time Increment: " + ((int)GlobalEnum.TIME_INCREMENTS - timeWindows) + "-------------------\n");
                 // Trucks arrive at random to the entrance over the course of the simulation.
 
                 // Everytime increment, trucks might show up. 50/50 chance each increment
@@ -26,7 +26,7 @@ namespace WarehouseSimulation
 					int trucksToAdd = rand.Next(3) + 1;
                     // 1 - 4 trucks will be added at random.
                     AddTrucks(trucksToAdd);
-					totalAdds++;
+					totalAdds += trucksToAdd;
                     Console.WriteLine($"{trucksToAdd} Trucks showed up.");
                 }
 
@@ -89,6 +89,11 @@ namespace WarehouseSimulation
             
         }
 
+        /// <summary>
+        /// Sets up the properties to be ready for the simulation's execution.
+        /// </summary>
+        /// <param name="amtOfDocks"> The number of docks that the simulation starts with </param>
+        /// <param name="amtOfTrucks"> The number of trucks that the simulation starts with </param>
         private void SetupSimulation(int amtOfDocks=15, int amtOfTrucks=100)
 		{
 			for (int i = 0; i < amtOfDocks; i++)
@@ -98,6 +103,10 @@ namespace WarehouseSimulation
 				Entrance.Enqueue(TruckFactory.GetRandomTruck());
 		}
 
+        /// <summary>
+        /// Adds a truck to the entrance of the warehouse
+        /// </summary>
+        /// <param name="amt"> The amount of trucks to add </param>
 		private void AddTrucks(int amt)
 		{
             for (int i = 0; i < amt; i++)

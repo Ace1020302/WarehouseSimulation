@@ -4,7 +4,7 @@ namespace WarehouseSimulation
 	public class Dock
 	{
 		// increments for each new dock
-        static int IdNum = 0;
+        static int numOfDocks = 0;
 
         string Id;
 
@@ -45,19 +45,20 @@ namespace WarehouseSimulation
 
 		public Dock()
 		{
-            IdNum++;
-            Id = idToString();
+            numOfDocks++;
+            Id = idToString(numOfDocks);
         }
 
         /// <summary>
-        /// Converts the id number to a string
-        /// </summary>
-        /// <returns> Returns id as string </returns>
-        private string idToString()
+		/// Converts the id to a string
+		/// </summary>
+		/// <param name="idNumToConvert"> Id of dock to convert</param>
+		/// <returns> String </returns>
+        private string idToString(int idNumToConvert)
         {
 			//string idString = $"{IdNum}".PadLeft(2, '0');
 			//return $"{idString}";
-			return $"{IdNum}";
+			return $"{idNumToConvert}";
         }
 
 		/// <summary>
