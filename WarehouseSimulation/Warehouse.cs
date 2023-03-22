@@ -11,7 +11,7 @@ namespace WarehouseSimulation
 
         public Warehouse(int amtOfDocks=0)
         {
-            SetupSimulation(amtOfDocks, 0);
+            SetupSimulation(amtOfDocks);
         }
 
 		public void Run()
@@ -105,8 +105,6 @@ namespace WarehouseSimulation
 			for (int i = 0; i < amtOfDocks; i++)
 				Docks.Add(new Dock());
 
-			for (int i = 0; i < amtOfTrucks; i++)
-				Entrance.Enqueue(TruckFactory.GetRandomTruck());
 		}
 
         /// <summary>
