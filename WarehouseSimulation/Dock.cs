@@ -51,21 +51,9 @@ namespace WarehouseSimulation
 
 		public Dock()
 		{
-            numOfDocks++;
+			numOfDocks++;
 			longestLine = 0;
-            Id = idToString(numOfDocks);
-        }
-
-        /// <summary>
-		/// Converts the id to a string
-		/// </summary>
-		/// <param name="idNumToConvert"> Id of dock to convert</param>
-		/// <returns> String g</returns>
-        private string idToString(int idNumToConvert)
-        {
-			//string idString = $"{IdNum}".PadLeft(2, '0');
-			//return $"{idString}";
-			return $"{idNumToConvert}";
+			Id = $"{numOfDocks}";
         }
 
 		/// <summary>
@@ -85,13 +73,13 @@ namespace WarehouseSimulation
 		/// <summary>
 		/// Causes the current truck to either unload, or move on.
 		/// </summary>
-		public void DoCurrentTruckAction(int timeIncrement)
+		public void DoCurrentTruckAction(int time)
 		{
 			// stops it from doing anything if nothing needs to happen.
 			if (TotalTrucks == 0)
 				return;
 
-            string infoToOutput = $"Time: {timeIncrement},";
+            string infoToOutput = $"Time: {time},";
 
             Truck currentTruck = Line.Peek();
 
@@ -109,10 +97,9 @@ namespace WarehouseSimulation
 					// If the truck is empty, send it off. Say whether or not the dock is now empty
 					sendOff();
 					if(Line.Count() != 0)
-						infoToOutput += "and another truck is already in the Dock";
+						infoToOutput += " and another truck is already in the Dock";
 					else
-						infoToOutput += "and another truck is not in the Dock";
-                    
+						infoToOutput += " and another truck is not in the Dock";  
                 }
                 else
                     infoToOutput += "Crate was unloaded but the truck still has more crates to unload";
@@ -137,15 +124,10 @@ namespace WarehouseSimulation
 			return Line.Dequeue();
 		}
 
-		// Testing method -- remove
-		//private int TotalCratesIncludingTrucks()
-		//{
-  //          int x = 0;
-  //          for (int i = 0; i < Line.Count(); i++)
-  //              x += Line.ElementAt(i).GetNumberOfCrates();
-  //          return x;
-  //      }
-
+		/// <summary>
+		/// Convert info of the Dock into a readable format.
+		/// </summary>
+		/// <returns> Returns info of the dock as a string </returns>
         public override string ToString()
         {
             return $"Dock {Id}: {TotalTrucks} Trucks, {TotalCrates} Crates, {TimeInUse} time open, {TimeNotInUse} time closed";

@@ -3,7 +3,8 @@ class Program
 {
     static void Main(string[] args)
     {
-        (new Warehouse(15)).Run();
+        int numOfDocks = 15;
+        (new Warehouse(numOfDocks)).Run();
 
         Console.ReadLine();
     }

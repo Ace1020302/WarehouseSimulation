@@ -17,20 +17,14 @@ namespace WarehouseSimulation
 		public Crate()
 		{
             numOfCratesCreated++;
-			Id = idToString();
+			Id = $"C{ $"{numOfCratesCreated}".PadLeft(3,'0') }";
 			Price = (new Random()).NextDouble() * 500;
 		}
 
-		/// <summary>
-		/// Converts the id number to a padded string lead with a capital C.
-		/// </summary>
-		/// <returns> Returns a string </returns>
-		private string idToString()
-		{
-			string idString = $"{numOfCratesCreated}".PadLeft(3, '0');
-			return $"C{idString}";
-		}
-
+        /// <summary>
+        /// Convert info of the Crate into a readable format.
+        /// </summary>
+        /// <returns> Returns info of the crate as a string </returns>
         public override string ToString()
         {
             double priceRounded = Math.Round(Price, 2);

@@ -52,6 +52,10 @@ namespace WarehouseSimulation
         /// <returns> Integer representing number of crates on the truck </returns>
         public int GetNumberOfCrates() => Trailer.Count();
 
+        /// <summary>
+		/// Convert info of the Truck into a readable format.
+		/// </summary>
+		/// <returns> Returns info of the Truck as a string </returns>
         public override string ToString() => $"Driver: {driver},Company: {deliveryCompany}";
         
     }

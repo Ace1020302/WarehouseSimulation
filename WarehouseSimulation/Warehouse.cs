@@ -11,7 +11,7 @@ namespace WarehouseSimulation
         public static List<double> CrateValues = new List<double>();
         public static List<double> TruckValues = new List<double>();
 
-        Random rand = new Random((int)GlobalEnum.SEED_FOR_RANDOM);
+        Random rand = new Random();
 
         public Warehouse(int amtOfDocks=0)
         {
@@ -20,30 +20,16 @@ namespace WarehouseSimulation
 
 		public void Run()
 		{
-            
-           
-            int timeWindows = (int) GlobalEnum.TIME_INCREMENTS;
-			int totalAdds = 0;
-			while (timeWindows > 0)
+            int time = 0;
+			int totalAmtOfTrucksIntroduced = 0;
+
+			while (time < (int) GlobalEnum.TIME_INCREMENTS)
 			{
-				Console.WriteLine("\n--------------- Time Increment: " + ((int)GlobalEnum.TIME_INCREMENTS - timeWindows) + "-------------------\n");
+				Console.WriteLine("\n--------------- Time Increment: " + time + "-------------------\n");
                 // Trucks arrive at random to the entrance over the course of the simulation.
 
-                // TODO: Increase/Decrease frequency based on time increment range
-
-                totalAdds += IntroduceTrucks((int)GlobalEnum.TIME_INCREMENTS - timeWindows);
-                if(timeWindows > 12 & timeWindows < ((int)GlobalEnum.TIME_INCREMENTS - 12))
-                {
-					int trucksToAdd = rand.Next(10) + 1;
-                    // 1 - 4 trucks will be added at random.
-                    AddTrucks(trucksToAdd);
-					totalAdds += trucksToAdd;
-                    
-                }
-                else
-                {
-
-                }
+                // Introduces Trucks and adds them to the total
+                totalAmtOfTrucksIntroduced += IntroduceTrucks(time);
 
                 // For each time increment, or loop in this while, a single truck can enter a dock.
                 if (Entrance.Count > 0)
@@ -67,13 +53,13 @@ namespace WarehouseSimulation
 				{
 					Dock currentDock = Docks[i];
                     // Trucks immediately swap out if there is another at the dock. No time increment decrease.
-                    currentDock.DoCurrentTruckAction((int) GlobalEnum.TIME_INCREMENTS - timeWindows);
+                    currentDock.DoCurrentTruckAction(time);
                 }
 
 
                 //Thread.Sleep(500);
 
-                timeWindows--;
+                time++;
             }
 
             Console.WriteLine("\n\n============================================================\n");
@@ -84,11 +70,13 @@ namespace WarehouseSimulation
             int totalTimeOfOperation = 0;
 			double totalEarnings = 0;
 
-            
+            int docksUsed = 0;
 
             int totalAmountOfCrates = 0;
 			foreach(Dock dock in Docks)
 			{
+                if (dock.TimeInUse != 0)
+                    docksUsed++;
                 totalEarnings += dock.TotalSales;
                 totalTimeOfOperation += dock.TimeInUse;
                 totalAmountOfCrates += dock.TotalCrates;
@@ -107,17 +95,20 @@ namespace WarehouseSimulation
             totalProfit = Math.Round(totalProfit, 2);
             totalEarnings = Math.Round(totalEarnings, 2);
 
-
+            Console.WriteLine($"Dock Info: ");
+           
             
+            Console.WriteLine($"\t{totalAmtOfTrucksIntroduced} trucks entered the warehouse");
+            Console.WriteLine($"\t{docksUsed} out of {Docks.Count()} Docks were used");
+            Console.WriteLine($"\tLongest Line Length: {Dock.totalLongestLine}");
 
-
-            Console.WriteLine("\n\n============================================================\n");
-            Console.WriteLine($"Dock Info:\n\t{totalAdds} trucks entered the warehouse\n\t{Docks.Count()} Docks were used\n\tLongest Line Length: {Dock.totalLongestLine}");
             Console.WriteLine("Individual Dock Info:");
+
             foreach (Dock dock in Docks)
             {
                 Console.WriteLine($"\t{dock}");
             }
+
             Console.WriteLine("Overall Info:");
             Console.WriteLine($"\tTotal Trucks Processed: {Dock.numOfTrucksProcessed}\n\tTotal Crate Count: {totalAmountOfCrates}");
             Console.WriteLine($"\tAverage Value of Crates: {avgValOfCrates}");

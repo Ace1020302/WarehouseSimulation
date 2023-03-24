@@ -2,9 +2,8 @@
 namespace WarehouseSimulation
 {
 	public enum GlobalEnum
-	{
-		TIME_INCREMENTS = 48,
-		SEED_FOR_RANDOM = 10005
+	{ 
+		TIME_INCREMENTS = 48
 	}
 }
 
