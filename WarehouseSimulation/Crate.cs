@@ -3,7 +3,7 @@ namespace WarehouseSimulation
 {
 	public class Crate
 	{
-		static int IdNum = 0;
+		static int numOfCratesCreated = 0;
 
 		public string Id { get; private set; }
 
@@ -16,7 +16,7 @@ namespace WarehouseSimulation
 
 		public Crate()
 		{
-			IdNum++;
+            numOfCratesCreated++;
 			Id = idToString();
 			Price = (new Random()).NextDouble() * 500;
 		}
@@ -27,7 +27,7 @@ namespace WarehouseSimulation
 		/// <returns> Returns a string </returns>
 		private string idToString()
 		{
-			string idString = $"{IdNum}".PadLeft(3, '0');
+			string idString = $"{numOfCratesCreated}".PadLeft(3, '0');
 			return $"C{idString}";
 		}
 

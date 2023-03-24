@@ -7,6 +7,9 @@ namespace WarehouseSimulation
 
         string deliveryCompany;
 
+        // Keeps track of unloaded crates
+        public static int numOfUnloads = 0;
+
         Stack<Crate> Trailer;
 
         public Truck(string driver, string deliveryCompany, Stack<Crate> trailer)
@@ -35,7 +38,13 @@ namespace WarehouseSimulation
         /// Unloads a crate from the Truck.
         /// </summary>
         /// <returns> The Crate being unloaded </returns>
-        public Crate Unload() => Trailer.Pop();
+        public Crate Unload()
+        {
+            Crate crateBeingPopped = Trailer.Pop();
+            Warehouse.CrateValues.Add(crateBeingPopped.Price);
+            numOfUnloads++;
+            return crateBeingPopped;
+        }
 
         /// <summary>
         /// Gets number of crates on the truck

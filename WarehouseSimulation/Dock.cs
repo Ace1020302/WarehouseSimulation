@@ -6,9 +6,15 @@ namespace WarehouseSimulation
 		// increments for each new dock
         static int numOfDocks = 0;
 
+		public int longestLine { get; private set; }
+		public static int totalLongestLine { get; private set; }
+		public static int numOfTrucksProcessed = 0;
+
         string Id;
 
         Queue<Truck> Line = new Queue<Truck>();
+
+		List<int> truckTotalValues = new List<int>();
 
 		// Gets total amount of money from all the crates at the dock
 		public double TotalSales
@@ -46,6 +52,7 @@ namespace WarehouseSimulation
 		public Dock()
 		{
             numOfDocks++;
+			longestLine = 0;
             Id = idToString(numOfDocks);
         }
 
@@ -68,6 +75,10 @@ namespace WarehouseSimulation
         public void JoinLine(Truck truck)
 		{
 			Line.Enqueue(truck);
+			if (longestLine < Line.Count())
+				longestLine = Line.Count();
+			if (totalLongestLine < longestLine)
+				totalLongestLine = longestLine;
 		}
 
 
@@ -113,7 +124,7 @@ namespace WarehouseSimulation
 				Crates.Push(poppedCrate);
 			}
 			
-            Console.WriteLine($"Incremented time for Dock {Id} | Total: {TimeInUse} hours");
+            Console.WriteLine($"Incremented time for Dock {Id} | Total: {TimeInUse} increments");
             TimeInUse++;
 		}
 
@@ -121,21 +132,23 @@ namespace WarehouseSimulation
 		/// Takes a truck out of the Dock line.
 		/// </summary>
 		/// <returns> Returns Truck that is leaving the queue </returns>
-		private Truck sendOff() => Line.Dequeue();
+		private Truck sendOff() {
+			numOfTrucksProcessed++;
+			return Line.Dequeue();
+		}
 
 		// Testing method -- remove
-		private int TotalCratesIncludingTrucks()
-		{
-            int x = 0;
-            for (int i = 0; i < Line.Count(); i++)
-                x += Line.ElementAt(i).GetNumberOfCrates();
-            return x;
-        }
-
+		//private int TotalCratesIncludingTrucks()
+		//{
+  //          int x = 0;
+  //          for (int i = 0; i < Line.Count(); i++)
+  //              x += Line.ElementAt(i).GetNumberOfCrates();
+  //          return x;
+  //      }
 
         public override string ToString()
         {
-            return $"Dock {Id}: {TotalTrucks} Trucks, {TotalCrates} Crates";
+            return $"Dock {Id}: {TotalTrucks} Trucks, {TotalCrates} Crates, {TimeInUse} time open, {TimeNotInUse} time closed";
         }
     }
 }
