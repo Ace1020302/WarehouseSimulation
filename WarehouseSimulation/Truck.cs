@@ -41,7 +41,7 @@ namespace WarehouseSimulation
         public Crate Unload()
         {
             Crate crateBeingPopped = Trailer.Pop();
-            Warehouse.CrateValues.Add(crateBeingPopped.Price);
+            
             numOfUnloads++;
             return crateBeingPopped;
         }
@@ -57,7 +57,12 @@ namespace WarehouseSimulation
 		/// </summary>
 		/// <returns> Returns info of the Truck as a string </returns>
         public override string ToString() => $"Driver: {driver},Company: {deliveryCompany}";
-        
+
+        public static void Reset()
+        {
+            numOfUnloads = 0;
+        }
+
     }
 }
 

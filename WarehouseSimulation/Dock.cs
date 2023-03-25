@@ -125,13 +125,29 @@ namespace WarehouseSimulation
 		}
 
 		/// <summary>
-		/// Convert info of the Dock into a readable format.
+		/// Convert info of the Dock into a readable format for iteration output.
 		/// </summary>
 		/// <returns> Returns info of the dock as a string </returns>
+        public string iterationString()
+        {
+            return $"Dock {Id}: {TotalTrucks} Trucks, {TotalCrates} Crates";
+        }
+
+        /// <summary>
+        /// Convert info of the Dock into a readable format.
+        /// </summary>
+        /// <returns> Returns info of the dock as a string </returns>
         public override string ToString()
         {
             return $"Dock {Id}: {TotalTrucks} Trucks, {TotalCrates} Crates, {TimeInUse} time open, {TimeNotInUse} time closed";
         }
+
+		public static void Reset()
+		{
+            numOfDocks = 0;
+			totalLongestLine = 0;
+			numOfTrucksProcessed = 0;
+		}
     }
 }
 

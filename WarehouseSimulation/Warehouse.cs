@@ -8,9 +8,6 @@ namespace WarehouseSimulation
 
 		Queue<Truck> Entrance = new Queue<Truck>();
 
-        public static List<double> CrateValues = new List<double>();
-        public static List<double> TruckValues = new List<double>();
-
         Random rand = new Random();
 
         public Warehouse(int amtOfDocks=0)

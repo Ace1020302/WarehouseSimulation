@@ -33,6 +33,11 @@ namespace WarehouseSimulation
             infoToOutput += $"Crate Value: ${priceRounded}";
             return infoToOutput;
         }
+
+		public static void Reset()
+		{
+			numOfCratesCreated = 0;
+		}
     }
 }
 
