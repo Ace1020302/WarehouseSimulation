@@ -106,7 +106,7 @@ namespace WarehouseSimulation
 
 				infoToOutput += ",\n";
 
-				Console.WriteLine(infoToOutput);
+				CSVWriter.writeToLog(infoToOutput);
 
 				Crates.Push(poppedCrate);
 			}
