@@ -9,6 +9,7 @@ namespace WarehouseSimulation
 
         public static void prepLogFile()
         {
+            Directory.CreateDirectory("../../../Logs");
             string[] files = Directory.GetFiles("../../../Logs");
             string pattern = @"\d+";
 

@@ -126,19 +126,33 @@ namespace WarehouseSimulation
         /// <returns> The amount of trucks added to the Entrance (int) </returns>
         private int IntroduceTrucks(int time)
         {
-            int trucksToAdd;
+            int trucksToAdd = 0;
             // Checks first two hours and the second two hours assuming 10 minute increments
-            if (time > 12 & time < ((int)GlobalEnum.TIME_INCREMENTS - 12))
+            bool isNoon = (time > 12 & time < ((int)GlobalEnum.TIME_INCREMENTS - 12));
+
+            // Modifer for chance of it happening.Increases to 1.5 if in Noon.
+            double randModifer = 1;
+            Random rand = new Random();
+            int chanceOfIntroducing = (int)(rand.NextDouble() * 100);
+            if (isNoon)
+                randModifer = 1.5;
+            chanceOfIntroducing *= (int) randModifer;
+
+            
+            if (chanceOfIntroducing >= 50)
             {
-                trucksToAdd = rand.Next(10) + 1;
-                // 1 - 10 trucks will be added at random.
-                AddTrucks(trucksToAdd);
-            }
-            else
-            {
-                trucksToAdd = rand.Next(20) + 1;
-                // 1 - 20 tucks will be added at random.
-                AddTrucks(trucksToAdd);
+                if (isNoon)
+                {
+                    trucksToAdd = rand.Next(20) + 1;
+                    // 1 - 20 trucks will be added at random.
+                    AddTrucks(trucksToAdd);
+                }
+                else
+                {
+                    trucksToAdd = rand.Next(10) + 1;
+                    // 1 - 10 tucks will be added at random.
+                    AddTrucks(trucksToAdd);
+                }
             }
             return trucksToAdd;
         }
