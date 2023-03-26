@@ -1,4 +1,13 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////
+//
+// Author: Phillip Edwards, edwardspb1@etsu.edu
+// Course: CSCI-2210-001 - Data Structures
+// Assignment: Warehouse Project 3
+// Description: Class that outlines the warehouse for the simulation.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+using System;
 namespace WarehouseSimulation
 {
 	public class Warehouse
@@ -10,12 +19,19 @@ namespace WarehouseSimulation
 
         Random rand = new Random();
 
+        /// <summary>
+        /// Constructor for a Warehouse
+        /// </summary>
+        /// <param name="amtOfDocks"> Amount of docks that the warehouse has available </param>
         public Warehouse(int amtOfDocks=0)
         {
             SetupSimulation(amtOfDocks);
 
         }
 
+        /// <summary>
+        /// Simulates the warehouse for 48 time iterations. 
+        /// </summary>
 		public void Run()
 		{
             int time = 0;
@@ -24,8 +40,6 @@ namespace WarehouseSimulation
 
             while (time < (int) GlobalEnum.TIME_INCREMENTS)
 			{
-                
-                //Console.WriteLine("\n--------------- Time Increment: " + time + "-------------------\n");
                 OutputDraw.time = time;
                 // Introduces Trucks and adds them to the total
                 totalAmtOfTrucksIntroduced += IntroduceTrucks(time);

@@ -1,4 +1,13 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////
+//
+// Author: Phillip Edwards, edwardspb1@etsu.edu
+// Course: CSCI-2210-001 - Data Structures
+// Assignment: Warehouse Project 3
+// Description: Class that outlines a truck for the simulation.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+using System;
 namespace WarehouseSimulation
 {
 	public class Truck
@@ -12,6 +21,12 @@ namespace WarehouseSimulation
 
         Stack<Crate> Trailer;
 
+        /// <summary>
+        /// Constructor of Truck class. 
+        /// </summary>
+        /// <param name="driver"> Driver of truck </param>
+        /// <param name="deliveryCompany"> Company truck belongs to </param>
+        /// <param name="trailer"> Trailer of Crates on the truck </param>
         public Truck(string driver, string deliveryCompany, Stack<Crate> trailer)
         {
             this.driver = driver;
@@ -58,6 +73,9 @@ namespace WarehouseSimulation
 		/// <returns> Returns info of the Truck as a string </returns>
         public override string ToString() => $"Driver: {driver},Company: {deliveryCompany}";
 
+        /// <summary>
+        /// resets the truck's static values.
+        /// </summary>
         public static void Reset()
         {
             numOfUnloads = 0;

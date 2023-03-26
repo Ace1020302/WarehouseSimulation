@@ -1,4 +1,13 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////
+//
+// Author: Phillip Edwards, edwardspb1@etsu.edu
+// Course: CSCI-2210-001 - Data Structures
+// Assignment: Warehouse Project 3
+// Description: Class that outlines a dock for the simulation.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+using System;
 namespace WarehouseSimulation
 {
 	public class Dock
@@ -51,6 +60,9 @@ namespace WarehouseSimulation
 			get => (int) GlobalEnum.TIME_INCREMENTS - TimeInUse;
 		}
 
+		/// <summary>
+		/// Constructor for a dock.
+		/// </summary>
 		public Dock()
 		{
 			numOfDocks++;
@@ -146,6 +158,9 @@ namespace WarehouseSimulation
             return $"Dock {Id}: {TotalTrucks} Trucks, {TotalCrates} Crates, {TimeInUse} time open, {TimeNotInUse} time closed";
         }
 
+		/// <summary>
+		/// resets the dock's static values
+		/// </summary>
 		public static void Reset()
 		{
             numOfDocks = 0;

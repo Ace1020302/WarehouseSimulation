@@ -1,4 +1,13 @@
-﻿using System;
+﻿///////////////////////////////////////////////////////////////////////////////
+//
+// Author: Phillip Edwards, edwardspb1@etsu.edu
+// Course: CSCI-2210-001 - Data Structures
+// Assignment: Warehouse Project 3
+// Description: Class that is used for generating random trucks for the simulation.
+//
+///////////////////////////////////////////////////////////////////////////////
+
+using System;
 namespace WarehouseSimulation
 {
 	public static class TruckFactory
@@ -11,7 +20,7 @@ namespace WarehouseSimulation
 		/// <summary>
 		/// Returns a truck with a randomized properties and 1-30 crates.
 		/// </summary>
-		/// <returns></returns>
+		/// <returns> A truck with a random number of crates between 1 and 30, a random driver name, and a random company name. </returns>
         public static Truck GetRandomTruck()
 		{
 			string driver = names[randomizer.Next(names.Length - 1)];
