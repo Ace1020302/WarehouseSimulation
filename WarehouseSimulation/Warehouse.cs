@@ -13,18 +13,20 @@ namespace WarehouseSimulation
         public Warehouse(int amtOfDocks=0)
         {
             SetupSimulation(amtOfDocks);
+
         }
 
 		public void Run()
 		{
             int time = 0;
 			int totalAmtOfTrucksIntroduced = 0;
+            OutputDraw.docks = Docks;
 
-			while (time < (int) GlobalEnum.TIME_INCREMENTS)
+            while (time < (int) GlobalEnum.TIME_INCREMENTS)
 			{
-				Console.WriteLine("\n--------------- Time Increment: " + time + "-------------------\n");
-                // Trucks arrive at random to the entrance over the course of the simulation.
-
+                
+                //Console.WriteLine("\n--------------- Time Increment: " + time + "-------------------\n");
+                OutputDraw.time = time;
                 // Introduces Trucks and adds them to the total
                 totalAmtOfTrucksIntroduced += IntroduceTrucks(time);
 
@@ -33,14 +35,19 @@ namespace WarehouseSimulation
                 {
                     // finds the best dock to add the crate to. If none are free, open a new dock and make that one the optimal one.
                     Dock OptimalDock = Docks[0];
-
+                    int OptimalDockNum = 0;
                     for (int i = 1; i < Docks.Count(); i++)
                     {
                         if (Docks[i].TotalTrucks < OptimalDock.TotalTrucks)
+                        {
                             OptimalDock = Docks[i];
+                            OptimalDockNum = i;
+                        }
                     }
 
                     OptimalDock.JoinLine(Entrance.Dequeue());
+
+                    OutputDraw.DrawTruckEnteringLine(OptimalDockNum);
                 }
 
                 // Interates through the docks and makes them do necessary changes
@@ -55,9 +62,11 @@ namespace WarehouseSimulation
 
 
                 //Thread.Sleep(500);
-
+                OutputDraw.docks = Docks;
                 time++;
             }
+
+            OutputDraw.DrawFinal();
 
             Console.WriteLine("\n\n============================================================\n");
 

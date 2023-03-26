@@ -10,6 +10,8 @@ namespace WarehouseSimulation
 		public static int totalLongestLine { get; private set; }
 		public static int numOfTrucksProcessed = 0;
 
+		int idAsNum;
+
         string Id;
 
         Queue<Truck> Line = new Queue<Truck>();
@@ -54,6 +56,7 @@ namespace WarehouseSimulation
 			numOfDocks++;
 			longestLine = 0;
 			Id = $"{numOfDocks}";
+			idAsNum = numOfDocks;
         }
 
 		/// <summary>
@@ -121,6 +124,7 @@ namespace WarehouseSimulation
 		/// <returns> Returns Truck that is leaving the queue </returns>
 		private Truck sendOff() {
 			numOfTrucksProcessed++;
+			OutputDraw.DrawTruckExitingLine(idAsNum);
 			return Line.Dequeue();
 		}
 
