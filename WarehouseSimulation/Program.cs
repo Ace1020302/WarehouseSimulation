@@ -27,7 +27,7 @@ class Program
             try
             {
                 numOfDocks = int.Parse(input);
-                if (numOfDocks < 0)
+                if (numOfDocks < 0 || numOfDocks > 15)
                 {
                     if(numOfDocks != -1)
                         Console.WriteLine("Try a different number");

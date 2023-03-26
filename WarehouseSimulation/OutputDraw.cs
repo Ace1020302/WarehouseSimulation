@@ -32,7 +32,7 @@ namespace WarehouseSimulation
 			for (int i = 0; i < 4; i++)
 			{
 				Console.WriteLine(DrawTruckMovingForward(truckPosition, i));
-                Thread.Sleep(100);
+                Thread.Sleep(150);
             }
 		}
 
@@ -63,7 +63,7 @@ namespace WarehouseSimulation
             {
                 Console.WriteLine(DrawDocksWithTruckAtExit(truckPosition));
                 truckPosition++;
-                Thread.Sleep(100);
+                Thread.Sleep(150);
             }
 		}
 
