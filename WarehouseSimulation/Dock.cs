@@ -136,7 +136,8 @@ namespace WarehouseSimulation
 		/// <returns> Returns Truck that is leaving the queue </returns>
 		private Truck sendOff() {
 			numOfTrucksProcessed++;
-			OutputDraw.DrawTruckExitingLine(idAsNum);
+            Console.Clear();
+            OutputDraw.DrawTruckExitingLine(idAsNum);
 			return Line.Dequeue();
 		}
 

@@ -40,6 +40,25 @@ class Program
                 continue;
             }
             CSVWriter.prepLogFile();
+            int speed = 0;
+            do
+            {
+                Console.WriteLine("Animation Speed Upto 5 (default 0, no animation 5): ");
+                string spdInput = Console.ReadLine();
+                try
+                {
+                    speed = int.Parse(spdInput);
+                    if (speed < 0 || speed > 4)
+                        throw new Exception();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Try a valid number");
+                }
+            } while ((speed < 0 || speed > 5));
+
+            OutputDraw.Speed = 5 - speed;
+
             (new Warehouse(numOfDocks)).Run();
             resetStatics();
 

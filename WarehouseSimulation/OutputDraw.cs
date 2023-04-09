@@ -12,6 +12,7 @@ namespace WarehouseSimulation
 {
 	public class OutputDraw
 	{
+        public static int Speed {  get; set; }
         public static List<Dock> docks { get; set; }
         public static int time = 0;
 
@@ -25,14 +26,16 @@ namespace WarehouseSimulation
 			int truckPosition = 0;
 			while(truckPosition <= dockNum)
 			{
-				Console.WriteLine(DrawDocksWithTruckAtPosition(truckPosition));
+                Console.Clear();
+                Console.WriteLine(DrawDocksWithTruckAtPosition(truckPosition));
 				truckPosition++;
-				Thread.Sleep(200);
+				Thread.Sleep(50*Speed);
 			}
 			for (int i = 0; i < 4; i++)
 			{
-				Console.WriteLine(DrawTruckMovingForward(truckPosition, i));
-                Thread.Sleep(150);
+                Console.Clear();
+                Console.WriteLine(DrawTruckMovingForward(truckPosition, i));
+                Thread.Sleep(40*Speed);
             }
 		}
 
@@ -61,9 +64,10 @@ namespace WarehouseSimulation
             int truckPosition = dockNum;
             while (truckPosition < docks.Count())
             {
+                Console.Clear();
                 Console.WriteLine(DrawDocksWithTruckAtExit(truckPosition));
                 truckPosition++;
-                Thread.Sleep(150);
+                Thread.Sleep(40*Speed);
             }
 		}
 

@@ -38,6 +38,7 @@ namespace WarehouseSimulation
 			int totalAmtOfTrucksIntroduced = 0;
             OutputDraw.docks = Docks;
 
+
             while (time < (int) GlobalEnum.TIME_INCREMENTS)
 			{
                 OutputDraw.time = time;
@@ -61,6 +62,7 @@ namespace WarehouseSimulation
 
                     OptimalDock.JoinLine(Entrance.Dequeue());
 
+                    Console.Clear();
                     OutputDraw.DrawTruckEnteringLine(OptimalDockNum);
                 }
 
@@ -76,10 +78,12 @@ namespace WarehouseSimulation
 
 
                 //Thread.Sleep(500);
+                Console.Clear();
                 OutputDraw.docks = Docks;
                 time++;
             }
 
+            Console.Clear();
             OutputDraw.DrawFinal();
 
             Console.WriteLine("\n\n============================================================\n");
